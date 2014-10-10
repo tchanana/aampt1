@@ -1,0 +1,13 @@
+
+function [ output_args ] = Task1(epidemicfilepath1,epidemicfilepath2 )
+TempWordTable1=readtable(epidemicfilepath1)
+TempWordTable2=readtable(epidemicfilepath2);
+
+SizeOfWordTable1=size(TempWordTable1);
+ SizeOfWordTable2=size(TempWordTable2);
+
+WordTable1=TempWordTable1(:,4:end);
+WordTable2=TempWordTable2(:,4:end);
+
+
+DistinctTable=intersect(WordTable1,WordTable2)
