@@ -2,4 +2,5 @@ inputfile='C:\MWD\project\dataset\worddir\epidemic_word_file.csv';%'test1.csv'
 file1='1.csv';
 file2='2.csv';
 
-sim = task1FGH(inputfile,file1,file2)
+sim1 = task1FGH(inputfile,file1,file2)
+sim2 = task1CDE(inputfile,file1,file2)
