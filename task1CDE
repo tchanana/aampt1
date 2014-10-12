@@ -1,0 +1,16 @@
+function simlarity = task1CDE(inputfile,file1,file2)
+
+wordTable=readtable(inputfile);
+
+%task 1.c
+wordFile1Idx=strcmp(wordTable.Filename,file1);
+W1=unique(wordTable(wordFile1Idx,4:end),'rows');
+wordFile2Idx=strcmp(wordTable.Filename,file2);
+W2=unique(wordTable(wordFile2Idx,4:end),'rows');
+
+simlarity=height(intersect(W1,W2,'rows'));
+
+%end
+
+
+
