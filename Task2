@@ -1,0 +1,143 @@
+%Task2
+% Three inputs:
+% Similarity measure(1..c)
+% Simulation file (f).. 1.csv.. 50.csv
+% Integer K
+% The program perfors a sim measure for all the 
+
+prompt        = ('Enter Directory for New Epidemic Simulation File : ');
+DIRECTORY     = input(prompt,'s'); %'C:\MWDB\P2_1B\';
+
+prompt        = ('Enter new Epidemic Simulation File: ');
+FILE_NAME_FP  = input (prompt,'s'); 
+FP_PATH       = strcat(DIRECTORY,FILE_NAME_FP);
+
+% The set of simulation files
+prompt          = ('Enter Directory for set of simulation files: ');
+DIRECTORY_Sim   = input(prompt,'s');
+list_file       = dir(strcat(DIRECTORY_Sim,'*.csv')); 
+Similarity      = cell(size(list_file,1),2); 
+
+%Similarity      = cell(size(list_file,1),2); 
+i               = 0;
+%prompt('Enter the Similarity Measure');
+choice = menu('Enter Similarity Measure ','1a','1b','1c','1d','1e','1f','1g','1h');
+
+    switch choice
+        case 1
+           display('calculating');
+           for file = list_file'
+            i = i+1;   
+            F2_PATH         = strcat(DIRECTORY_Sim,file.name);
+            Similarity{i,1} = Phase2_1a(FP_PATH, F2_PATH);
+            Similarity{i,2} = file.name;
+           end;
+            %break;
+        case 2
+            display('calculating');
+             for file = list_file'
+                i = i+1;   
+                F2_PATH         = strcat(DIRECTORY_Sim,file.name);
+                Similarity{i,1}= Phase2_1b(FP_PATH, F2_PATH);
+                Similarity{i,2}= file.name;
+            end;
+           %break;
+        case 3
+            display('calculating');
+            prompt          = ('Enter Directory for Word File: ');
+            DIRECTORY_WAD   = input(prompt,'s');
+            FILE_WAD = strcat(DIRECTORY_WAD,'epidemic_word_file.csv');
+                     for file = list_file'
+                        i = i+1;
+                        Similarity{i,1} = task1CDE(FILE_WAD,FILE_NAME_FP, file.name);
+                        Similarity{i,2} = file.name;
+                     end;
+                    % break;
+         case 4
+             display('calculating');
+             prompt          = ('Enter Directory for Average File: ');
+             DIRECTORY_WAD   = input(prompt,'s');       
+             FILE_WAD = strcat(DIRECTORY_WAD,'epidemic_word_file_avg.csv');
+                     for file = list_file'
+                        i = i+1;
+                        Similarity{i,1} = task1CDE(FILE_WAD,FILE_NAME_FP, file.name);
+                        Similarity{i,2} = file.name;
+                     end;
+                    % break;
+         case 5
+             display('calculating');
+              prompt          = ('Enter Directory for Diff File: ');
+              DIRECTORY_WAD   = input(prompt,'s');
+              FILE_WAD = strcat(DIRECTORY_WAD,'epidemic_word_file_diff.csv');
+                     for file = list_file'
+                         F2_PATH  = strcat(DIRECTORY_WAD,file.name);
+                          i = i+1;
+                        Similarity{i,1} = task1CDE(FILE_WAD,FILE_NAME_FP, file.name);
+                        Similarity{i,2} = file.name;
+                     end;
+                 % break;
+
+         case 6
+             display('calculating');
+            prompt          = ('Enter Directory for Word File: ');
+            DIRECTORY_WAD   = input(prompt,'s');
+            FILE_WAD = strcat(DIRECTORY_WAD,'epidemic_word_file.csv');
+                     for file = list_file'
+                        i = i+1;
+                        Similarity{i,1} = task1FGH(FILE_WAD,FILE_NAME_FP, file.name);
+                        Similarity{i,2} = file.name;
+                     end;
+           % break;
+
+        case 7
+            display('calculating');
+            prompt          = ('Enter Directory for Average File: ');
+            DIRECTORY_WAD   = input(prompt,'s');
+            FILE_WAD = strcat(DIRECTORY_WAD,'epidemic_word_file_avg.csv');
+                     for file = list_file'
+                        i = i+1;
+                        Similarity{i,1} = task1FGH(FILE_WAD,FILE_NAME_FP, file.name);
+                        Similarity{i,2} = file.name;
+                     end;
+           % break;
+        case 8
+            display('calculating');
+            prompt          = ('Enter Directory for Difference File: ');
+            DIRECTORY_WAD   = input(prompt,'s');
+            FILE_WAD = strcat(DIRECTORY_WAD,'epidemic_word_file_diff.csv');
+                     for file = list_file'
+                        i = i+1;
+                        Similarity{i,1} = task1FGH(FILE_WAD,FILE_NAME_FP, file.name);
+                        Similarity{i,2} = file.name;
+                     end;
+           % break;
+    end;
+%order Similarity
+Similarity = sortrows(Similarity,-1);
+prompt=('Please Enter the number of similarities: ');
+K = input(prompt);
+
+    for i = 1:K
+        FP_PATH = strcat(DIRECTORY_Sim,Similarity{i,2});
+        % .... HEAT MAP.... %
+        [File_Data,header]=xlsread(FP_PATH); %Read the simulaation file for heat map
+        File_K = File_Data(:,3:end);
+        stateheader=header(1,3:end); % Read the header to retrieve staate names
+        states=cellfun(@(x) x(4:end),stateheader,'UniformOutput',false); % truncte the 'US-' state from states to index into LocationMatrix 
+        %%Following code is used to display heaatmap used the colormap as cool
+        figure;
+        colormap('Cool');   
+        img=imagesc(File_K);        
+        colorbar;         
+        set(gca,'fontsize',7);
+        set(gca,'XTickLabel',states); %labeling the X-axis as per state names
+        set(gca,'XTick',1:numel(states)); % tick marks on x axis
+        xlabel('States','FontSize',11);
+        ylabel('IterationIndex','FontSize',11) % y-axis label
+        titleDisplay = strcat('Heat Map',Similarity{i,2});
+        title(titleDisplay,'FontSize',15);%title for heat map
+    end;
+
+% end;
+
+
