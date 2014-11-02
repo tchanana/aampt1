@@ -55,3 +55,4 @@ for i = 1:r
 end
 fclose(outputFile);
 disp('Top r semantics successfully written in ToprSemanticSVD.txt');
+msgbox('Top r semantics successfully written in ToprSemanticSVD.txt');
