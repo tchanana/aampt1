@@ -6,7 +6,7 @@ switch createWordDirectory
     case 1
         DIRECTORY_Sim   = uigetdir('','Enter Directory for set of simulation files');
         wordFilePath=MWDPhase1_1(strcat(DIRECTORY_Sim,'\'));
-        MWDPhase1_2(wordFilePath); 
+        MWDPhase1_2(); 
 end
 
 % which task to be performed?
