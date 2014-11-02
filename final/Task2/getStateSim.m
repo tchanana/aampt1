@@ -6,7 +6,7 @@ if(state1==state2)
     stateDiff=1;
 else
     if(LocationMatrix{State1,State2}==1)
-    stateDiff=0.5
+    stateDiff=0.5;
     
     else
         stateDiff=0;
