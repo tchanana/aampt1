@@ -250,3 +250,4 @@ for j = 1:k
 end
 fclose(outputFile);
 disp('Top k objects successfully written in TopkObjectsSimSim.txt');
+msgbox('Top k objects successfully written in TopkObjectsSimSim.txt');
