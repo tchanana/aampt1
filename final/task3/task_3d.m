@@ -67,3 +67,4 @@ for i = 1:k
 end
 fclose(outputFile);
 disp('Top k objects successfully written in TopkObjectsSVD.txt');
+msgbox('Top k objects successfully written in TopkObjectsSVD.txt');
