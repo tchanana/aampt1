@@ -8,7 +8,7 @@ prompt = 'Enter the value of r: ';
 dlg_title = 'Input Parameter';
 r = inputdlg(prompt,dlg_title);
 r = str2num(r{1,1});
-debug = 1;
+debug = 0;
 
 if (sim_type == 1 || sim_type == 2)
     DIRECTORY_Sim   = uigetdir('','Select directory containing set of simulation files');
@@ -117,7 +117,7 @@ switch sim_type
                 file1table = WordTable(file1Idx,:);
                 file2Idx = strcmp(WordTable.Filename, file2name);
                 file2table = WordTable(file2Idx,:);
-                SimSim(i,j)       = sim_A_WAD(file1table, file2table,file_name);
+                SimSim(i,j) = double(sim_A_WAD(file1table, file2table,file_name));
                 SimSim(j,i) = SimSim(i,j);
             end
         end
@@ -135,7 +135,7 @@ switch sim_type
                 file1table = WordTable(file1Idx,:);
                 file2Idx = strcmp(WordTable.Filename, file2name);
                 file2table = WordTable(file2Idx,:);
-                SimSim(i,j) = sim_A_WAD(file1table, file2table,file_name);
+                SimSim(i,j) = double(sim_A_WAD(file1table, file2table,file_name));
                 SimSim(j,i) = SimSim(i,j);
             end
         end
@@ -153,7 +153,7 @@ switch sim_type
                 file1table = WordTable(file1Idx,:);
                 file2Idx = strcmp(WordTable.Filename, file2name);
                 file2table = WordTable(file2Idx,:);
-                SimSim(i,j) = sim_A_WAD(file1table, file2table,file_name);
+                SimSim(i,j) = double(sim_A_WAD(file1table, file2table,file_name));
                 SimSim(j,i) = SimSim(i,j);
             end
         end
