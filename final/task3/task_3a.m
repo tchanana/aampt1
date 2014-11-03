@@ -4,8 +4,10 @@ clearvars;
 [FileName,PathName] = uigetfile('*.csv','Select word file for set of simulation files');
 wordFile = strcat(PathName,FileName);
 prompt = 'Enter the value of r: ';
-r = input(prompt);
-debug = 1;
+dlg_title = 'Input Parameter';
+r = inputdlg(prompt,dlg_title);
+r = str2num(r{1,1});
+debug = 0;
 
 wordTable=readtable(wordFile);
 uniqueFiles = unique(wordTable.Filename); %extract names of epidemic simulation files
@@ -31,7 +33,7 @@ if debug == 1 % Plotting error graph for analysis
         avgErrorPCT(j) = sum(sum(errorPCT))/size(error,1)/size(error,2);
         Sedit(6-j,6-j) = 0;
     end
-    figure;plot(avgErrorPCT'); % draw error % while reducing r
+    figure;plot(avgErrorPCT');title('Percentage error while reducing dimentions'); % draw error % while reducing r
 end
 
 % preparing semantic matrix by filling object names in 1st column
